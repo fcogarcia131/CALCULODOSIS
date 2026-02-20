@@ -54,6 +54,11 @@ button:hover { background-color: #0056b3; }
     font-weight: bold;
     text-align: center;
 }
+
+.boton-secundario {
+    margin-top: 10px;
+    background-color: #28a745;
+}
 </style>
 </head>
 
@@ -78,6 +83,12 @@ button:hover { background-color: #0056b3; }
 <input type="number" id="volumen" placeholder="Ej: 10000">
 
 <button onclick="calcular()">Calcular</button>
+
+<a href="insecticidas.html">
+    <button class="boton-secundario">
+        Ir a Calculadora de Insecticidas
+    </button>
+</a>
 
 <div id="resultado" class="resultado" style="display:none;"></div>
 

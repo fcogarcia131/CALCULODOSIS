@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Calculadora de Dosis de Biocidas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f8;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            width: 400px;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        select, input {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 6px;
+            background-color: #007bff;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .resultado {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #e9f7ef;
+            border-radius: 6px;
+            font-weight: bold;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Calculadora de Dosis de Biocidas</h2>
+
+    <label for="biocida">Seleccionar Biocida:</label>
+    <select id="biocida">
+        <option value="576000">Peróxido de Hidrógeno 48% (OX AGUA) - 576000 ppm</option>
+        <option value="187500">Hipoclorito Sódico 15% - 187500 ppm</option>
+        <option value="162500">Hipoclorito Sódico 13% - 162500 ppm</option>
+        <option value="300000">Peróxido de Hidrógeno 25% (OX AIRE TORRES) - 300000 ppm</option>
+    </select>
+
+    <label for="dosis">Concentración Deseada (ppm):</label>
+    <input type="number" id="dosis" placeholder="Ej: 50">
+
+    <label for="volumen">Volumen del Sistema (litros):</label>
+    <input type="number" id="volumen" placeholder="Ej: 10000">
+
+    <button onclick="calcular()">Calcular</button>
+
+    <div id="resultado" class="resultado" style="display:none;"></div>
+</div>
+
+<script>
+    function calcular() {
+        const concentracionBiocida = parseFloat(document.getElementById("biocida").value);
+        const dosisDeseada = parseFloat(document.getElementById("dosis").value);
+        const volumenSistema = parseFloat(document.getElementById("volumen").value);
+
+        if (isNaN(dosisDeseada) || isNaN(volumenSistema)) {
+            alert("Por favor, complete todos los campos.");
+            return;
+        }
+
+        const volumenML = (dosisDeseada * volumenSistema) / concentracionBiocida;
+
+        const resultadoDiv = document.getElementById("resultado");
+        resultadoDiv.style.display = "block";
+        resultadoDiv.innerHTML = "Debe añadir <br><br>" + volumenML.toFixed(2) + " mL de biocida.";
+    }
+</script>
+
+</body>
+</html>

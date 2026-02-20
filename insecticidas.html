@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>Calculadora de Dosis de Biocidas</title>
+<title>Calculadora de Insecticidas</title>
 
 <style>
 body {
@@ -24,7 +24,7 @@ body {
 
 label { font-weight: bold; }
 
-select, input {
+input {
     width: 100%;
     padding: 8px;
     margin-top: 5px;
@@ -38,13 +38,13 @@ button {
     padding: 10px;
     border: none;
     border-radius: 6px;
-    background-color: #007bff;
+    background-color: #28a745;
     color: white;
     font-size: 16px;
     cursor: pointer;
 }
 
-button:hover { background-color: #0056b3; }
+button:hover { background-color: #1e7e34; }
 
 .resultado {
     margin-top: 20px;
@@ -61,21 +61,19 @@ button:hover { background-color: #0056b3; }
 
 <div class="container">
 
-<h2>Calculadora de Dosis de Biocidas</h2>
+<h2>Calculadora de Dosificación de Insecticidas</h2>
 
-<label>Seleccionar Biocida:</label>
-<select id="biocida">
-    <option value="576000">Peróxido Hidrógeno 48% (OX AGUA) - 576000 ppm</option>
-    <option value="187500">Hipoclorito Sódico 15% - 187500 ppm</option>
-    <option value="162500">Hipoclorito Sódico 13% - 162500 ppm</option>
-    <option value="300000">Peróxido Hidrógeno 25% (OX AIRE TORRES) - 300000 ppm</option>
-</select>
+<label>Nombre del insecticida:</label>
+<input type="text" id="nombre" placeholder="Ej: Cipermetrina">
 
-<label>Concentración Deseada (ppm):</label>
-<input type="number" id="dosis" placeholder="Ej: 50">
+<label>Concentración en garrafa (%):</label>
+<input type="number" id="concentracion" placeholder="Ej: 10">
 
-<label>Volumen del Sistema (L):</label>
-<input type="number" id="volumen" placeholder="Ej: 10000">
+<label>Volumen de caldo a preparar (L):</label>
+<input type="number" id="volumenCaldo" placeholder="Ej: 500">
+
+<label>Dosis deseada (%):</label>
+<input type="number" id="dosis" placeholder="Ej: 0.5">
 
 <button onclick="calcular()">Calcular</button>
 
@@ -86,11 +84,12 @@ button:hover { background-color: #0056b3; }
 <script>
 function calcular() {
 
-    const concentracion = parseFloat(document.getElementById("biocida").value);
+    const nombre = document.getElementById("nombre").value;
+    const concentracion = parseFloat(document.getElementById("concentracion").value);
+    const volumen = parseFloat(document.getElementById("volumenCaldo").value);
     const dosis = parseFloat(document.getElementById("dosis").value);
-    const volumen = parseFloat(document.getElementById("volumen").value);
 
-    if (isNaN(dosis) || isNaN(volumen)) {
+    if (!nombre || isNaN(concentracion) || isNaN(volumen) || isNaN(dosis)) {
         alert("Complete todos los campos.");
         return;
     }
@@ -101,6 +100,7 @@ function calcular() {
     const resultado = document.getElementById("resultado");
     resultado.style.display = "block";
     resultado.innerHTML = `
+        Producto: ${nombre}<br><br>
         Volumen a añadir:<br><br>
         ${volumenLitros.toFixed(4)} L<br>
         ${volumenML.toFixed(2)} mL

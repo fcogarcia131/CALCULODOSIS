@@ -54,6 +54,11 @@ button:hover { background-color: #1e7e34; }
     font-weight: bold;
     text-align: center;
 }
+
+.boton-volver {
+    margin-top: 10px;
+    background-color: #007bff;
+}
 </style>
 </head>
 
@@ -76,6 +81,12 @@ button:hover { background-color: #1e7e34; }
 <input type="number" id="dosis" placeholder="Ej: 0.5">
 
 <button onclick="calcular()">Calcular</button>
+
+<a href="index.html">
+    <button class="boton-volver">
+        Volver a Biocidas
+    </button>
+</a>
 
 <div id="resultado" class="resultado" style="display:none;"></div>
 
